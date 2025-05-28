@@ -1,0 +1,7 @@
+server:
+  port: 7171
+
+spring:
+  application.name: tg-assistant-bot
+  profiles.active: local
+

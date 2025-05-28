@@ -1,0 +1,23 @@
+
+networks:
+  tg-sskier:
+
+services:
+  telegramm-sskier-db:
+    image: postgres:16.1
+    container_name: db-telegram-sskier-container
+    ports:
+      - "3001:5432"
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=telegrammSskierDB
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 5s
+      interval: 5s
+      retries: 10
+    networks:
+      - tg-sskier
