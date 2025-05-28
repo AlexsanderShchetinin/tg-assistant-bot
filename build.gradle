@@ -24,17 +24,21 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation group: 'org.flywaydb', name: 'flyway-core', version: "$flywayVersion"
 	implementation group: 'org.flywaydb', name: 'flyway-database-postgresql', version: "$flywayVersion"
 	implementation group: 'org.telegram', name: 'telegrambots', version: "$telegrambotsVersion"
 	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: "$okHttp3Version"
 	implementation group: 'org.datanucleus', name: 'jakarta.persistence', version: "$jpaVersion"
-	implementation group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
 	implementation group: 'org.mapstruct', name: 'mapstruct', version: "$mapstructVersion"
-	//implementation group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: "$lombokMapstructBindingVersion"
+	implementation "com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:$jakartaXmlBindVersion"
+	implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
 
 	compileOnly 'org.projectlombok:lombok'
+
+	runtimeOnly "org.postgresql:postgresql:$postgresqlVersion"
 
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"

@@ -2,11 +2,8 @@ package ru.sskier.tg_assistant_bot.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+
 
 /**
  * Класс содержащий информацию о пользователях
@@ -14,6 +11,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(schema = "assistant_bot", name = "users")
 public class User {
