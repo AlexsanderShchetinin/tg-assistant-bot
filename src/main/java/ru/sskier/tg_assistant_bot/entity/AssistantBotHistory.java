@@ -39,7 +39,7 @@ public class AssistantBotHistory {
     /**
      * дата и время отправки сообщения
      */
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime created;
 
     /**

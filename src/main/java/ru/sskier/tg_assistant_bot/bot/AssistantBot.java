@@ -8,6 +8,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.sskier.tg_assistant_bot.entity.AssistantBotHistory;
 import ru.sskier.tg_assistant_bot.exception.BotException;
 import ru.sskier.tg_assistant_bot.mapper.UserMapperImpl;
 import ru.sskier.tg_assistant_bot.repository.AssistantBotHistoryRepository;
@@ -48,9 +49,17 @@ public class AssistantBot extends TelegramLongPollingBot {
         String message = update.getMessage().getText();
         Long chatId = update.getMessage().getChatId();
         var sender = userMapper.toAppUser(update.getMessage().getFrom());
+        // save user if his first using bot
         if(userRepository.findById(sender.getId()).isEmpty()){
             userRepository.save(sender);
         }
+        // save history
+        AssistantBotHistory assistantBotHistory = AssistantBotHistory.builder()
+                .user(sender)
+                .chatId(chatId)
+                .textMessage(message)
+                .build();
+        botHistoryRepository.save(assistantBotHistory);
 
         switch (message){
             case START -> {
