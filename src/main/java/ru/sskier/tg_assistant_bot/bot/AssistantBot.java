@@ -95,7 +95,7 @@ public class AssistantBot extends TelegramLongPollingBot {
                 Я экспериментальный Бот помощник который пока что может:
                 /rates - получить курсы валют от центрабанка на сегодняшний день
                 /help - получить дополнительную справку по моей работе
-                                
+                
                 """;
         var formattedText = String.format(text, firstName);
         sendMessage(formattedText, chatId);
@@ -122,10 +122,10 @@ public class AssistantBot extends TelegramLongPollingBot {
                 - При вводе команды /rates будет выведен отсортированный в алфавитном порядке список всех курсов валют от ЦБ РФ (всего 43 валюты).
                 Данные по валютам обновляются каждый день.
                 Поэтому особого смысла несколько раз на дню вызывать команду /rates нет :)
-                                
+                
                 Если у тебя есть предложения по улучшению или вводу дополнительного функционала,
                 то предлагаю написать моему создателю @Sskier
-                                
+                
                 Надеюсь я понравился тебе %s, удачи!
                 """;
         sendMessage(String.format(text, Emojis.BLUSH), chatId);

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 
 /**
- * Узловой класс валюты для парсинга XML с https://cbr.ru/scripts/XML_daily.asp
+ * Узловой класс валюты для парсинга XML с <a href="https://cbr.ru/scripts/XML_daily.asp">курсы валют центробанка</a>
  */
 @Getter
 @Setter

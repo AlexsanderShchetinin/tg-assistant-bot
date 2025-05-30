@@ -9,7 +9,6 @@ import ru.sskier.tg_assistant_bot.entity.valute.CompositeValuteKey;
 import ru.sskier.tg_assistant_bot.entity.valute.Valute;
 import ru.sskier.tg_assistant_bot.entity.valute.ValuteParser;
 import ru.sskier.tg_assistant_bot.exception.BotException;
-import ru.sskier.tg_assistant_bot.mapper.ValuteMapperImpl;
 import ru.sskier.tg_assistant_bot.repository.ValuteRepository;
 import ru.sskier.tg_assistant_bot.service.AssistantBotService;
 
@@ -25,8 +24,6 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class AssistantBotServiceImpl implements AssistantBotService {
-
-    private final static String EXCHANGE_RATES_XPATH = "/ValCurs//Valute[@ID='R01235']/Value";
 
     private final CbrClient cbrClient;
     private final ValuteRepository valuteRepository;
@@ -64,17 +61,5 @@ public class AssistantBotServiceImpl implements AssistantBotService {
             throw new BotException("Не удалось распарсить XML", e);
         }
     }
-
-    private static String extractCurrencyValueFromXML(String xml, String xpathExpression) throws BotException {
-        var source = new InputSource(new StringReader(xml));
-        try {
-            var xpath = XPathFactory.newInstance().newXPath();
-            var document = (Document) xpath.evaluate("/", source, XPathConstants.NODE);
-            return xpath.evaluate(xpathExpression, document);
-        } catch (XPathExpressionException e) {
-            throw new BotException("Не удалось распарсить XML", e);
-        }
-    }
-
 
 }

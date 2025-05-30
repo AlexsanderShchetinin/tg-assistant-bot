@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * Составной ключ идентификатора валюты получаемый из id валюты и даты
- * id валюты получаем из ресурса  "https://cbr.ru/scripts/XML_daily.asp"
+ * id валюты получаем из поля ID каждого <a href="https://cbr.ru/scripts/XML_daily.asp">курса валют ЦБ РФ</a>"
  */
 @Embeddable
 @AllArgsConstructor
