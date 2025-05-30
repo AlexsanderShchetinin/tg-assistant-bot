@@ -1,12 +1,14 @@
 package ru.sskier.tg_assistant_bot.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 
 /**
- * Класс содержащий информацию о пользователях
+ * Класс содержащий информацию о пользователях telegram
  */
 @Getter
 @Builder
@@ -14,76 +16,65 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(schema = "assistant_bot", name = "users")
+@EqualsAndHashCode(of = {"id", "firstName"})
+@ToString(of = {"id", "firstName"})
 public class User {
-
-    private static final String ID_FIELD = "id";
-    private static final String FIRSTNAME_FIELD = "first_name";
-    private static final String ISBOT_FIELD = "is_bot";
-    private static final String LASTNAME_FIELD = "last_name";
-    private static final String USERNAME_FIELD = "username";
-    private static final String LANGUAGECODE_FIELD = "language_code";
-    private static final String CANJOINGROUPS_FIELD = "can_join_groups";
-    private static final String CANREADALLGROUPMESSAGES_FIELD = "can_read_all_group_messages";
-    private static final String SUPPORTINLINEQUERIES_FIELD = "supports_inline_queries";
-    private static final String ISPREMIUM_FIELD = "is_premium";
-    private static final String ADDEDTOATTACHMENTMENU_FIELD = "added_to_attachment_menu";
 
     /**
      * Уникальный идентификатор пользователя, всегда передается из Телеграмм
      */
     @Id
-    @JsonProperty(ID_FIELD)
     @NonNull
     private Long id;
 
-    @Column(name = FIRSTNAME_FIELD)
+    @Column(name = "first_name")
     @NonNull
     private String firstName;
     /**
      * True, if this user is a bot
      */
-    @Column(name = ISBOT_FIELD)
+    @Column(name = "is_bot")
     @NonNull
     private Boolean isBot;
     /**
      * Optional. User‘s or bot’s last name
      */
-    @Column(name = LASTNAME_FIELD)
+    @Column(name = "last_name")
     private String lastName;
     /**
      * Optional. User‘s or bot’s username
      */
-    @Column(name = USERNAME_FIELD)
+    @Column(name = "username")
     private String userName;
     /**
      * Optional. IETF language tag of the user's language
      */
-    @Column(name = LANGUAGECODE_FIELD)
+    @Column(name = "language_code")
     private String languageCode;
     /**
      * Optional. True, if the bot can be invited to groups. Returned only in getMe.
      */
-    @Column(name = CANJOINGROUPS_FIELD)
+    @Column(name = "can_join_groups")
     private Boolean canJoinGroups;
     /**
      * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
      */
-    @Column(name = CANREADALLGROUPMESSAGES_FIELD)
+    @Column(name = "can_read_all_group_messages")
     private Boolean canReadAllGroupMessages;
     /**
      * Optional. True, if the bot supports inline queries. Returned only in getMe.
      */
-    @Column(name = SUPPORTINLINEQUERIES_FIELD)
+    @Column(name = "supports_inline_queries")
     private Boolean supportInlineQueries;
     /**
      * Optional. True, if this user is a Telegram Premium user
      */
-    @Column(name = ISPREMIUM_FIELD)
+    @Column(name = "is_premium")
     private Boolean isPremium;
     /**
      * Optional. True, if this user added the bot to the attachment menu
      */
-    @Column(name = ADDEDTOATTACHMENTMENU_FIELD)
+    @Column(name = "added_to_attachment_menu")
     private Boolean addedToAttachmentMenu;
 
 

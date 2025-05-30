@@ -1,7 +1,8 @@
-package ru.sskier.tg_assistant_bot.entity;
+package ru.sskier.tg_assistant_bot.entity.valute;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public final class ValuteCbr {
 
     /**
@@ -49,5 +51,6 @@ public final class ValuteCbr {
      * курс валюты к 1 рублю
      */
     private BigDecimal valueUnitRate;
+
 
 }

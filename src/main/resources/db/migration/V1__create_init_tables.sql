@@ -22,3 +22,13 @@ CREATE TABLE IF NOT EXISTS assistant_bot.assistant_bot_history (
   created_at    TIMESTAMP   DEFAULT now() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS assistant_bot.exchange_rates (
+    id              VARCHAR(255)    NOT NULL,
+    date            DATE            NOT NULL,
+    num_code        SMALLINT,
+    char_code       VARCHAR(255),
+    name            VARCHAR(255)    NOT NULL,
+    value_unit_rate NUMERIC(19, 4)  NOT NULL,
+    PRIMARY KEY (id, date)
+)
+

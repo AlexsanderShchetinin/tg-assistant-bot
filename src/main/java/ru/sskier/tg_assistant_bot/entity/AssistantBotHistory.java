@@ -3,7 +3,6 @@ package ru.sskier.tg_assistant_bot.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 import java.time.LocalDateTime;
 
 /**
@@ -14,6 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(schema = "assistant_bot", name = "assistant_bot_history")
+@EqualsAndHashCode(of = {"id", "user"})
+@ToString(of = {"id", "user"})
 public class AssistantBotHistory {
 
     /**

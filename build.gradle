@@ -35,6 +35,7 @@ dependencies {
 	implementation "com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:$jakartaXmlBindVersion"
 	implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
 
+	implementation group: 'com.vdurmont', name: 'emoji-java', version: "$emojiJavaVersion"
 
 	compileOnly 'org.projectlombok:lombok'
 
