@@ -30,12 +30,7 @@ public class AssistantBotServiceImpl implements AssistantBotService {
 
     private final CbrClient cbrClient;
     private final ValuteRepository valuteRepository;
-    private final ValuteMapperImpl valuteMapper;
 
-    @Override
-    public String getExchangeRate(String nameExchangeRate) {
-        return "";
-    }
 
     @Override
     public String getExchangeRates() {

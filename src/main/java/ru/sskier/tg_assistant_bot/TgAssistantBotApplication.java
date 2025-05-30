@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TgAssistantBotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TgAssistantBotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TgAssistantBotApplication.class, args);
+    }
 
 }

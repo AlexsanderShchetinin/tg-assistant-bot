@@ -4,6 +4,4 @@ public interface AssistantBotService {
 
     String getExchangeRates();
 
-    String getExchangeRate(String nameExchangeRate);
-
 }
