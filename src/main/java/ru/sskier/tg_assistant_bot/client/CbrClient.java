@@ -15,7 +15,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CbrClient {
 
-    private final OkHttpClient cbrClient;
+    private final OkHttpClient client;
 
     @Value("${cbr.currency.rates.url}")
     private String ratesUrl;
@@ -25,7 +25,7 @@ public class CbrClient {
                 .url(ratesUrl)
                 .build();
 
-        try (Response response = cbrClient.newCall(request).execute();) {
+        try (Response response = client.newCall(request).execute();) {
             ResponseBody body = response.body();
             return body == null ? null : body.string();
         } catch (IOException e) {

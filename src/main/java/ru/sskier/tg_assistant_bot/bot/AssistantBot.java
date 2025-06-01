@@ -11,8 +11,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.sskier.tg_assistant_bot.entity.AssistantBotHistory;
 import ru.sskier.tg_assistant_bot.exception.BotException;
 import ru.sskier.tg_assistant_bot.mapper.UserMapperImpl;
-import ru.sskier.tg_assistant_bot.repository.AssistantBotHistoryRepository;
-import ru.sskier.tg_assistant_bot.repository.UserRepository;
 import ru.sskier.tg_assistant_bot.service.AssistantBotService;
 import ru.sskier.tg_assistant_bot.util.Emojis;
 
@@ -23,18 +21,13 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class AssistantBot extends TelegramLongPollingBot {
 
-    private final UserRepository userRepository;
-    private final AssistantBotHistoryRepository botHistoryRepository;
     private final UserMapperImpl userMapper;
     private final AssistantBotService assistantBotService;
 
     private final static String START = "/start";
     private final static String RATES = "/rates";
     private final static String HELP = "/help";
-    private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-    @Value("${bot.username}")
-    private String botUsername;
+    private final String botUsername;
 
 
     @Override
@@ -43,13 +36,12 @@ public class AssistantBot extends TelegramLongPollingBot {
     }
 
     @Autowired
-    public AssistantBot(
-            @Value("${bot.token}") String botToken,
-            UserRepository userRepository,
-            AssistantBotHistoryRepository botHistoryRepository, UserMapperImpl userMapper, AssistantBotService assistantBotService) {
+    public AssistantBot(@Value("${assistant_bot.token}") String botToken,
+                        @Value("${assistant_bot.username}") String botUsername,
+                        UserMapperImpl userMapper,
+                        AssistantBotService assistantBotService) {
         super(botToken);
-        this.userRepository = userRepository;
-        this.botHistoryRepository = botHistoryRepository;
+        this.botUsername = botUsername;
         this.userMapper = userMapper;
         this.assistantBotService = assistantBotService;
     }
@@ -63,20 +55,18 @@ public class AssistantBot extends TelegramLongPollingBot {
         Long chatId = update.getMessage().getChatId();
         var sender = userMapper.toAppUser(update.getMessage().getFrom());
         // save user if his first using bot
-        if (userRepository.findById(sender.getId()).isEmpty()) {
-            userRepository.save(sender);
-        }
+        assistantBotService.saveUser(sender);
         // save history
         AssistantBotHistory assistantBotHistory = AssistantBotHistory.builder()
                 .user(sender)
                 .chatId(chatId)
                 .textMessage(message)
                 .build();
-        botHistoryRepository.save(assistantBotHistory);
+        assistantBotService.saveUserHistory(assistantBotHistory);
 
         switch (message) {
             case START -> {
-                String firstName = update.getMessage().getChat().getFirstName();
+                String firstName = update.getMessage().getFrom().getFirstName();
                 startCommand(firstName, chatId);
             }
             case RATES -> {
@@ -95,15 +85,13 @@ public class AssistantBot extends TelegramLongPollingBot {
                 Я экспериментальный Бот помощник который пока что может:
                 /rates - получить курсы валют от центрабанка на сегодняшний день
                 /help - получить дополнительную справку по моей работе
-                
                 """;
         var formattedText = String.format(text, firstName);
         sendMessage(formattedText, chatId);
     }
 
     private void sendListRates(Long chatId) {
-        String exchangeRates = "Курсы валют на " + LocalDate.now().format(DATE_FORMAT) + " составляют:\n \n" +
-                assistantBotService.getExchangeRates();
+        String exchangeRates = assistantBotService.getExchangeRates();
         sendMessage(exchangeRates, chatId);
     }
 
