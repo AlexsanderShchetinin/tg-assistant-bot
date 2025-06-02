@@ -14,9 +14,6 @@ import ru.sskier.tg_assistant_bot.mapper.UserMapperImpl;
 import ru.sskier.tg_assistant_bot.service.AssistantBotService;
 import ru.sskier.tg_assistant_bot.util.Emojis;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 @Slf4j
 @Component
 public class AssistantBot extends TelegramLongPollingBot {
@@ -99,7 +96,7 @@ public class AssistantBot extends TelegramLongPollingBot {
         sendMessage("""
                 \n
                 Мои команды:
-                /rates - получить курсы валют от центрабанка на сегодняшний день
+                /rates - получить текущие на день курсы валют от центрабанка
                 /help - получить дополнительную справку по моей работе
                 """, chatId);
     }
@@ -110,10 +107,10 @@ public class AssistantBot extends TelegramLongPollingBot {
                 - При вводе команды /rates будет выведен отсортированный в алфавитном порядке список всех курсов валют от ЦБ РФ (всего 43 валюты).
                 Данные по валютам обновляются каждый день.
                 Поэтому особого смысла несколько раз на дню вызывать команду /rates нет :)
-                
+                                
                 Если у тебя есть предложения по улучшению или вводу дополнительного функционала,
                 то предлагаю написать моему создателю @Sskier
-                
+                                
                 Надеюсь я понравился тебе %s, удачи!
                 """;
         sendMessage(String.format(text, Emojis.BLUSH), chatId);

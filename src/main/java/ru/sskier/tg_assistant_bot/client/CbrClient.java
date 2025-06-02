@@ -24,7 +24,6 @@ public class CbrClient {
         Request request = new Request.Builder()
                 .url(ratesUrl)
                 .build();
-
         try (Response response = client.newCall(request).execute();) {
             ResponseBody body = response.body();
             return body == null ? null : body.string();

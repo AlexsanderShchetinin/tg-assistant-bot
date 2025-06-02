@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(schema = "assistant_bot", name = "assistant_bot_history")
 @EqualsAndHashCode(of = {"id", "user"})
