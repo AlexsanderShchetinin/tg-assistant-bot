@@ -24,12 +24,33 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.flywaydb:flyway-core'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'org.flywaydb', name: 'flyway-core', version: "$flywayVersion"
+	implementation group: 'org.flywaydb', name: 'flyway-database-postgresql', version: "$flywayVersion"
+	implementation group: 'org.telegram', name: 'telegrambots', version: "$telegrambotsVersion"
+	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: "$okHttp3Version"
+	implementation group: 'org.datanucleus', name: 'jakarta.persistence', version: "$jpaVersion"
+	implementation group: 'org.mapstruct', name: 'mapstruct', version: "$mapstructVersion"
+	implementation "com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:$jakartaXmlBindVersion"
+	implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
+	implementation group: 'com.vdurmont', name: 'emoji-java', version: "$emojiJavaVersion"
+
 	compileOnly 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly "org.postgresql:postgresql:$postgresqlVersion"
+
+	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructBindingVersion"
+
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.testcontainers:postgresql:$testContainersVersion"
+
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
